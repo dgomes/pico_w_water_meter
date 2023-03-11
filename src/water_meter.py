@@ -30,7 +30,10 @@ BATT_STATE_TOPIC = f"{NAME_SLUG}/sensor/{NAME_SLUG}_battery_level/state"
 BATT_VOLTAGE_TOPIC = f"{NAME_SLUG}/sensor/{NAME_SLUG}_voltage/state"
 AVAILABILITY_TOPIC = f"{NAME_SLUG}/status"
 CMD_TOPIC = f"{NAME_SLUG}/cmd"
+DORMANT_PIN_TOPIC = f"{NAME_SLUG}/dormant"
 
+CMD_RESET = b"reset"
+CMD_DISCOVERY = b"discovery"
 
 ##
 ##  https://www.ti.com/lit/ds/symlink/cd54hc4020.pd
@@ -58,7 +61,7 @@ q1 = Pin(6, Pin.IN, Pin.PULL_DOWN)
 spms = Pin("WL_GPIO1", Pin.OUT)
 led = Pin("LED", Pin.OUT)
 wlan_pwr = Pin(23, Pin.OUT)
-DORMANT_PIN = const(11)
+DORMANT_PIN = 11
 
 reset_pin = Pin(21, Pin.IN, Pin.PULL_DOWN)
 reset_flag = reset_pin.value()
@@ -102,6 +105,7 @@ def ha_discovery(mqtt_client):
         "water_meter_voltage": {
             "dev_cla": "voltage",
             "stat_cla": "measurement",
+            "unit_of_meas": "V",
             "name": f"{NAME} Voltage",
             "stat_t": STATE_TOPIC,
             "ent_cat": "diagnostic",
@@ -180,13 +184,15 @@ def read_counter():
 
 def mqtt_callback(topic: str, msg: str):
     """MQTT Callback handler."""
-    global reset_flag, ha_discovery_flag
+    global reset_flag, ha_discovery_flag, DORMANT_PIN
     logging.debug((topic, msg))
     if topic == CMD_TOPIC.encode():
-        if msg == b"reset":
+        if msg == CMD_RESET:
             reset_flag = True
-        if msg == b"discovery":
+        if msg == CMD_DISCOVERY:
             ha_discovery_flag = True
+    elif topic == DORMANT_PIN_TOPIC.encode():
+        DORMANT_PIN = int(msg)
 
 
 def measure_vsys():
@@ -229,10 +235,10 @@ def main():
             ha_discovery(mqtt_client)
             ha_discovery_flag = False
         state = {
-            "counter": meter,
+            "counter": meter / 10,
             "battery_level": int(100 * battery / MAX_BATTERY),
             "voltage": round(battery, 2),
-            "total": meter / 100,
+            "total": meter * 0.001,
         }
         # Publish meter information
         mqtt_client.publish(STATE_TOPIC.encode(), json.dumps(state).encode(), False, 1)

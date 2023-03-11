@@ -1,8 +1,8 @@
 # Water Meter Sensor
 
-Monitor your water usage through an energy-efficient IoT device attached to your water provider meter (which happens to have a metal "butterfly wheel) like the JANZ JT200:
+Monitor your water usage through an energy-efficient IoT device attached to your water provider meter (which happens to have a metal "butterfly wheel) like the JANZ JT400:
 
-![Water Meter](media/jt200.png "Water Meter")
+![Water Meter](media/jt400.png "Water Meter")
 
 This project enables you to monitor the water usage of your household water usage through the use of a DIY water meter sensor built using:
 
@@ -23,7 +23,7 @@ Just assemble everything :)
 
 You can find the PCB source files (KiCAD) in the respective directory. (`Water Meter PCB`)
 
-I designed a 3D-printed adapter for the Inductive Proximity Sensor.  (`3Dadapter directory`)
+I designed a 3D-printed adapter for the Inductive Proximity Sensor to fit the JANZ JT400.  (`3Dadapter directory`)
 
 The RPi Pico W is flashed with a micropython firmware and then you upload the project available in `src`
 

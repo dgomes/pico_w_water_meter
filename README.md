@@ -2,7 +2,7 @@
 
 Monitor your water usage through an energy-efficient IoT device attached to your water provider meter (which happens to have a metal "butterfly wheel) like the JANZ JT400:
 
-![Water Meter](media/jt400.png "Water Meter")
+![Water Meter](media/jt400.jpg "Water Meter")
 
 This project enables you to monitor the water usage of your household water usage through the use of a DIY water meter sensor built using:
 

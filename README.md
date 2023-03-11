@@ -1,6 +1,6 @@
 # Water Meter Sensor
 
-![Water Meter](media/jt200.png Water Meter)
+![Water Meter](media/jt200.png "Water Meter")
 
 This project enables you to monitor the water usage of your house hold water usage through the use of a DIY water meter sensor built using:
 

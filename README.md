@@ -21,9 +21,9 @@ Just assemble everything :)
 ![Box with PCB and Battery inside](media/prototype.jpg "Prototype")
 
 
-You can find the PCB source files (KiCAD) in the respective directory. (`Water Meter PCB`)
+You can find the PCB source files (KiCAD) in the respective directory. ([PCB files](https://github.com/dgomes/pico_w_water_meter/tree/main/Water%20Meter%20PCB))
 
-I designed a 3D-printed adapter for the Inductive Proximity Sensor to fit the JANZ JT400.  (`3Dadapter directory`)
+I designed a 3D-printed adapter for the Inductive Proximity Sensor to fit the JANZ JT400.  ([3Dadapter](https://github.com/dgomes/pico_w_water_meter/tree/main/3Dadapter))
 
 The RPi Pico W is flashed with a micropython firmware and then you upload the project available in `src`
 

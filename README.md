@@ -4,7 +4,7 @@ Monitor your water usage through an energy-efficient IoT device attached to your
 
 ![Water Meter](media/jt400.jpg "Water Meter")
 
-![Water Meter](media/fitter.jpg "All in place")
+![Water Meter](media/fitted.jpg "All in place")
 
 
 This project enables you to monitor the water usage of your household water usage through the use of a DIY water meter sensor built using:

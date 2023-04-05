@@ -43,5 +43,7 @@ SSID = "myhome_network"
 WIFI_PASSWORD = "blablabla" 
 
 SERVER = "192.168.1.1"  #this is your MQTT Broker Address
+USER = None #change this to your MQTT username, else leave None
+PASSWORD = None #change this to your MQTT password, else leave None
 
 ```

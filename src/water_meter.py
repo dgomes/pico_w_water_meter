@@ -11,7 +11,7 @@ from machine import ADC, Pin, reset, unique_id
 from micropython import const
 from umqtt.robust import MQTTClient
 
-from config import BSSID, SERVER, SSID, WIFI_PASSWORD
+from config import BSSID, SERVER, SSID, WIFI_PASSWORD, USER, PASSWORD
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -223,7 +223,7 @@ def main():
     try:
         wait_for_wifi(wlan)
 
-        mqtt_client = MQTTClient(CLIENT_ID, SERVER, keepalive=30)
+        mqtt_client = MQTTClient(CLIENT_ID, SERVER, user=USER, password=PASSWORD, keepalive=30)
         mqtt_client.connect(clean_session=False)
         mqtt_client.set_callback(mqtt_callback)
         mqtt_client.subscribe(CMD_TOPIC.encode())

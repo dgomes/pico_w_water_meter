@@ -238,7 +238,7 @@ def main():
             "counter": meter / 10,
             "battery_level": int(100 * battery / MAX_BATTERY),
             "voltage": round(battery, 2),
-            "total": meter * 0.001,
+            "total": meter * 0.0001,
         }
         # Publish meter information
         mqtt_client.publish(STATE_TOPIC.encode(), json.dumps(state).encode(), False, 1)

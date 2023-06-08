@@ -82,7 +82,7 @@ def ha_discovery(mqtt_client):
     sensors = {
         "water_meter_total": {
             "dev_cla": "water",
-            "unit_of_meas": "liter",
+            "unit_of_meas": "L",
             "stat_cla": "total_increasing",
             "name": f"{NAME} Total",
             "ic": "mdi:pulse",

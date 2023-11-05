@@ -9,7 +9,7 @@ import network
 import ubinascii
 from machine import ADC, Pin, reset, unique_id
 from micropython import const
-from umqtt.robust import MQTTClient
+from umqtt.simple import MQTTClient
 
 from config import BSSID, SERVER, SSID, WIFI_PASSWORD, USER, PASSWORD
 
@@ -18,7 +18,8 @@ logging.basicConfig(level=logging.DEBUG)
 VERSION = const(1)
 MAX_WIFI_RETRIES = const(10)
 RESET_VALUE = const(2**13)
-MAX_BATTERY = const(3.98)  # 4.2v - 0.280v is the diode drop
+MAX_BATTERY = const(5.2)  # 4 x 1.3v - 4xAA NiCM
+MIN_BATTERY = const(3.3)  
 
 NAME = "Water Meter"
 NAME_SLUG = "water_meter"
@@ -211,6 +212,7 @@ def measure_vsys():
 def main():
     """Fake a Main Loop through a reset at the end."""
     # Inital setup
+    start = time.ticks_ms()
     global reset_flag, ha_discovery_flag
 
     # Measure battery before anything wifi related
@@ -235,10 +237,11 @@ def main():
             ha_discovery(mqtt_client)
             ha_discovery_flag = False
         state = {
-            "counter": meter / 10,
-            "battery_level": int(100 * battery / MAX_BATTERY),
+            "counter": meter,
+            "battery_level": int(100 * (battery - MIN_BATTERY) / (MAX_BATTERY - MIN_BATTERY)),
             "voltage": round(battery, 2),
-            "total": meter * 0.0001,
+            "total": meter * 0.001,
+            "ms_elapsed": time.ticks_diff(start, time.ticks_ms())
         }
         # Publish meter information
         mqtt_client.publish(STATE_TOPIC.encode(), json.dumps(state).encode(), False, 1)

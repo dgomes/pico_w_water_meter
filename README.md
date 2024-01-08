@@ -47,3 +47,8 @@ USER = None #change this to your MQTT username, else leave None
 PASSWORD = None #change this to your MQTT password, else leave None
 
 ```
+
+# Powering
+
+- Using a 18650 3.7v battery the sensor can run for 2 weeks
+- Using a battery pack of 4 AA batteries the sensor can run for 4 weeks
